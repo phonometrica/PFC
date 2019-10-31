@@ -50,13 +50,13 @@ var tasks = {
 
 # Add metadata to a single annotation
 function add_metadata(annot)
-	print("adding metadata to '" + annot.path + "'")
+	print("adding metadata to '" & annot.path & "'")
 
 	# Set properties
 	var file = system.get_base_name(annot.path)
 	if re.match(file) then
 		var survey = re.group(1).to_upper()
-		var speaker = survey + re.group(2).to_upper()
+		var speaker = survey & re.group(2).to_upper()
 
 		var task = tasks[re.group(3)]
 		annot.add_property("Survey", survey)
@@ -66,9 +66,9 @@ function add_metadata(annot)
 
 	# Try to bind the annotation to a sound file
 	var base = system.strip_extension(annot.path)
-	base = base.left(base.length - 1) + "w"
+	base = base.left(base.length - 1) & "w"
 	foreach var ext in sound_extensions do
-		var sound = base + ext
+		var sound = base & ext
 		if system.exists(sound) then
 			annot.bind_to_sound(sound)
 			break
